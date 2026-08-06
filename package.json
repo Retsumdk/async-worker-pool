@@ -1,0 +1,16 @@
+{
+  "name": "async-worker-pool",
+  "description": "Scalable async worker pool for distributed task execution with rate limiting",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "bun test",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "requests": "^2.31.0",
+    "pyyaml": "^6.0.1",
+    "python-dotenv": "^1.0.0",
+    "click": "^8.1.7"
+  }
+}
