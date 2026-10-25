@@ -1,5 +1,29 @@
-node_modules/
+# Byte-compile caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
 dist/
-.env
-*.log
-coverage/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Type checkers
+.mypy_cache/
+.pyright/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store

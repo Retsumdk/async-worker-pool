@@ -1,0 +1,28 @@
+{
+  "description": "Sample job script for `awpool run --script examples/jobs.json`. Jobs are simulated work units (virtual clock, instant wall time) that exercise rate limiting, retry backoff, per-attempt timeouts, and dead-lettering.",
+  "pool": {
+    "workers": 3,
+    "rate": 6,
+    "burst": 6,
+    "timeout": 0.5,
+    "max_attempts": 3
+  },
+  "jobs": [
+    { "id": "thumb-01", "work_s": 0.1 },
+    { "id": "thumb-02", "work_s": 0.2 },
+    { "id": "thumb-03", "work_s": 0.15 },
+    { "id": "thumb-04", "fail_once": 1, "error": "transient storage hiccup", "work_s": 0.1 },
+    { "id": "thumb-05", "work_s": 0.2 },
+    { "id": "thumb-06", "work_s": 0.1 },
+    { "id": "thumb-07", "slow_first_s": 0.9, "work_s": 0.2 },
+    { "id": "thumb-08", "work_s": 0.15 },
+    { "id": "thumb-09", "fail_once": 1, "error": "transient decode glitch", "work_s": 0.1 },
+    { "id": "thumb-10", "work_s": 0.2 },
+    { "id": "thumb-11", "work_s": 0.1 },
+    { "id": "thumb-12", "work_s": 0.15 },
+    { "id": "thumb-13", "permanent": "unsupported colorspace: CMYK" },
+    { "id": "thumb-14", "work_s": 0.2 },
+    { "id": "thumb-15", "work_s": 0.1 },
+    { "id": "thumb-16", "work_s": 0.15 }
+  ]
+}

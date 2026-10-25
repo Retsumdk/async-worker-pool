@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: pip install -e ".[dev]"
+
+      - name: Byte-compile (syntax gate)
+        run: python -m compileall -q src tests
+
+      - name: Tests
+        run: pytest -q
+
+      - name: Demo determinism (two runs must be byte-identical)
+        run: |
+          awpool demo > /tmp/demo-a.txt
+          awpool demo > /tmp/demo-b.txt
+          diff /tmp/demo-a.txt /tmp/demo-b.txt
+
+      - name: CLI script runner end-to-end
+        run: |
+          awpool run --script examples/jobs.json --output /tmp/report.json
+          python -c "
+          import json
+          r = json.load(open('/tmp/report.json'))
+          assert r['stats']['submitted'] == 16, r['stats']
+          assert r['stats']['completed'] == 15, r['stats']
+          assert r['stats']['dead_lettered'] == 1, r['stats']
+          assert len(r['results']) == 16
+          assert len(r['dead_letters']) == 1
+          print('CLI report OK')
+          "

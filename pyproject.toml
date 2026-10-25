@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "async-worker-pool"
+version = "1.0.0"
+description = "Deterministic async worker pool with rate limiting, per-attempt timeouts, retry backoff, and dead-letter accounting — stdlib-only Python."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Retsumdk" }]
+keywords = ["asyncio", "worker-pool", "rate-limiting", "retries", "dead-letter", "deterministic", "testing"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Repository = "https://github.com/Retsumdk/async-worker-pool"
+Issues = "https://github.com/Retsumdk/async-worker-pool/issues"
+Changelog = "https://github.com/Retsumdk/async-worker-pool/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+awpool = "async_worker_pool.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+async_worker_pool = ["py.typed"]
